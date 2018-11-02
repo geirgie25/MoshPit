@@ -36,4 +36,13 @@ public class PlayerShootment : MonoBehaviour
         yield return new WaitForSeconds(ShootCDTime);
         ShootCD = true;
     }
+
+    public void SetBullet(GameObject newBullet)
+    {
+        currentBullet = newBullet;
+    }
+    public void SetTempo(float newShootCD)
+    {
+        ShootCDTime = newShootCD;
+    }
 }
