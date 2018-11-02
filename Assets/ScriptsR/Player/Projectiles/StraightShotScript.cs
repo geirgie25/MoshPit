@@ -5,16 +5,14 @@ using UnityEngine;
 public class StraightShotScript : MonoBehaviour {
 
 	[SerializeField]
-    float projectileSpeed, deathTimer;
+    float projectileSpeed, deathTimer, damage;
     Vector3 velocity;
     Rigidbody2D rb;
 
     private void Awake()
     {
         projectileSpeed *= 1500f;
-        Debug.Log(transform.right);
         velocity = new Vector3(transform.right.x * projectileSpeed, transform.right.y * projectileSpeed, transform.right.z);
-        Debug.Log(velocity);
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(velocity);
         StartCoroutine("killSelf");
@@ -39,4 +37,8 @@ public class StraightShotScript : MonoBehaviour {
         }
     }
 
+    public float HurtEnemy()
+    {
+        return damage;
+    }
 }
