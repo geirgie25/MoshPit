@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //TODO: Collision Detection
+    
 
 
     bool Right;
     bool Left;
     bool Up;
     bool Down;
-
-    //temp velocity to add to player (it's a vector3 for easy addition)
+    
+   
+    //temp velocity to add to player 
     Vector3 velocity;
 
     //Acceleration Speed
     public float AccSpeed;
-    //Decelleration Speed
-    public float DecSpeed;
-    //Max Movespeed
-    public float MaxMove;
-    //Min Movespeed
-    public float MinMove;
+    
+
+    Rigidbody2D Rb;
+
+    private void Awake()
+    {
+        Rb = GetComponent<Rigidbody2D>();   
+    }
+
 
     private void Update()
     {
@@ -31,61 +35,37 @@ public class PlayerMovement : MonoBehaviour
         Left = Input.GetButton("Left");
         Up = Input.GetButton("Up");
         Down = Input.GetButton("Down");
+       
 
         //Series of ifs for detecting input and adding to velocity
-        //Adds to velocity either the max or the sum(whichever is smaller)
-        if (Right)
+        if (Right )
         {
-            velocity.x = Mathf.Min(velocity.x + AccSpeed, MaxMove);
+            velocity.x = AccSpeed;
         }
-        if (Left)
+        if (Left )
         {
-            velocity.x = Mathf.Max(velocity.x - AccSpeed, -MaxMove);
+            velocity.x = -AccSpeed;
         }
-        if (Up)
+        if (Up )
         {
-            velocity.y = Mathf.Min(velocity.y + AccSpeed, MaxMove);
+            velocity.y = AccSpeed;
         }
-        if (Down)
+        if (Down )
         {
-            velocity.y = Mathf.Max(velocity.y - AccSpeed, -MaxMove);
+            velocity.y = -AccSpeed;
         }
 
-       
+        
         if(!Right && !Left)
-        {
-            if(velocity.x < 0)
-            {
-                velocity.x += DecSpeed;
-            }
-            if(velocity.x > 0)
-            {
-                velocity.x -= DecSpeed;
-            }
-        }
-        if(!Up && !Down)
-        {
-            if (velocity.y < 0)
-            {
-                velocity.y += DecSpeed;
-            }            
-            if (velocity.y > 0)
-            {            
-                velocity.y -= DecSpeed;
-            }
-        }
-
-        //if too slow then stop instead of sliding
-        if(Mathf.Abs(velocity.x) < MinMove)
         {
             velocity.x = 0;
         }
-        if (Mathf.Abs(velocity.y) < MinMove)
+        if(!Up && !Down)
         {
             velocity.y = 0;
         }
+        
 
-
-        transform.position += velocity;
+        Rb.AddForce(velocity);
     }
 }
