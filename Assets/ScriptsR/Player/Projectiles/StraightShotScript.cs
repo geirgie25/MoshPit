@@ -5,7 +5,7 @@ using UnityEngine;
 public class StraightShotScript : MonoBehaviour {
 
 	[SerializeField]
-    float projectileSpeed, deathTimer, damage;
+    float projectileSpeed, deathTimer;
     Vector3 velocity;
     Rigidbody2D rb;
 
@@ -37,8 +37,4 @@ public class StraightShotScript : MonoBehaviour {
         }
     }
 
-    public float HurtEnemy()
-    {
-        return damage;
-    }
 }
