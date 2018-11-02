@@ -55,6 +55,15 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -AccSpeed;
         }
 
+        if(Left && Right)
+        {
+            velocity.x = 0;
+        }
+        if(Up && Down)
+        {
+            velocity.y = 0;
+        }
+
         
         if(!Right && !Left)
         {
@@ -64,8 +73,13 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = 0;
         }
-        
 
+        
+        
+    }
+    private void FixedUpdate()
+    {
         Rb.AddForce(velocity);
+        
     }
 }
