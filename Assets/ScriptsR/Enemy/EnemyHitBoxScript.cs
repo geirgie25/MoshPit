@@ -19,6 +19,7 @@ public class EnemyHitBoxScript : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerProjectile"))
         {
             enemyHealth -= float.Parse(collision.gameObject.GetComponent<Text>().text);
+            Debug.Log(enemyHealth);
             if(enemyHealth <= 0)
             {
                 Destroy(transform.parent.gameObject);
